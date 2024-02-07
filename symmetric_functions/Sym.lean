@@ -22,15 +22,15 @@ def elementary (n : ℕ) : MvPolynomial ℕ+ R :=
 example (n : ℕ) : IsWeightedHomogeneous degree (elementary R n) n := by
   rw [elementary]
   split_ifs with h
-  apply isWeightedHomogeneous_monomial
-  unfold degree
-  unfold weightedDegree'
-  simp only [LinearMap.toAddMonoidHom_coe, Finsupp.total_single, smul_eq_mul, one_mul]
-  rfl
-  have nzero : n = 0 := by
-    cases n with
-    | zero => rfl
-    | succ n => exfalso; apply h; apply Nat.succ_pos
-  rw [nzero]
-  apply isWeightedHomogeneous_one
+  · apply isWeightedHomogeneous_monomial
+    unfold degree
+    unfold weightedDegree'
+    simp only [LinearMap.toAddMonoidHom_coe, Finsupp.total_single, smul_eq_mul, one_mul]
+    rfl
+  · have nzero : n = 0 := by
+      cases n with
+      | zero => rfl
+      | succ n => exfalso; apply h; apply Nat.succ_pos
+    rw [nzero]
+    apply isWeightedHomogeneous_one
   done
